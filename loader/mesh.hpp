@@ -24,6 +24,7 @@ class Mesh {
         /*  Functions  */
         Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures);
         void Draw(Shader shader);
+        ~Mesh();
     private:
         /*  Render data  */
         unsigned int VAO, VBO, EBO;
