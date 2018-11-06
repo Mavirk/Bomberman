@@ -1,6 +1,9 @@
 #ifndef MESH_HPP
 #define MESH_HPP
 
+#include <iostream>
+#include <strings>
+
 struct Vertex {
     glm::vec3 Position;
     glm::vec3 Normal;
