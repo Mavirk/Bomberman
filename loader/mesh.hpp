@@ -2,6 +2,7 @@
 #define MESH_HPP
 
 #include <iostream>
+#include <vector>
 #include <strings>
 
 struct Vertex {
