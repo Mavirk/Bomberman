@@ -10,14 +10,14 @@ class Model {
         void Draw(Shader shader);	
     private:
         /*  Model Data  */
-        vector<Texture> textures_loaded;
-        vector<Mesh> meshes;
-        string directory;
+        std::vector<Texture> textures_loaded;
+        std::vector<Mesh> meshes;
+        std::string directory;
         /*  Functions   */
-        void loadModel(string path);
+        void loadModel(std::string path);
         void processNode(aiNode *node, const aiScene *scene);
         Mesh processMesh(aiMesh *mesh, const aiScene *scene);
-        vector<Texture> loadMaterialTextures(aiMaterial *mat, aiTextureType type, string typeName);
+        std::vector<Texture> loadMaterialTextures(aiMaterial *mat, aiTextureType type, string typeName);
         unsigned int    TextureFromFile(const char *path, const string &directory, bool gamma = false);
 };
 
