@@ -3,6 +3,9 @@
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include "camera.hpp"
+// #include ""
+
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 class Game {
     public:
