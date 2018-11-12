@@ -8,6 +8,7 @@ class Game {
     public:
         GLFWwindow* window;
         bool    running;
+        char    **map;
         Game();
         ~Game();
         int     init();

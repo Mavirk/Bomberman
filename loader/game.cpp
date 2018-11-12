@@ -1,5 +1,6 @@
 #include <iostream>
 #include "game.hpp"
+
 void framebuffer_size_callback(GLFWwindow* window, int width, int height){
     if (window)
         glViewport(0, 0, width, height);
@@ -27,7 +28,6 @@ void    Game::run(){
         // check events and swap buffers
         glfwSwapBuffers(window);
         glfwPollEvents();    
-        
     }
     return;
 }
