@@ -6,7 +6,11 @@ LIB=				-L ~/.brew/lib -lGLEW.2.1 -lglfw.3.2  -I ~/.brew/include -framework Open
 CPPFLAGS=			-Wall -Wextra -Werror
 SRC=				main.cpp \
 					game.cpp \
-					camera.cpp
+					model.cpp \
+					shader.cppv \
+					camera.cpp \
+					mesh.cpp 
+
 
 COM_COLOR   = \033[0;34m
 OBJ_COLOR   = \033[0;36m

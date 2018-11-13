@@ -5,6 +5,9 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include "camera.hpp"
+#include "model.hpp"
+#include "shader.hpp"
+#include "mesh.hpp"
 
 void    framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void    KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode);
@@ -18,6 +21,7 @@ class Game {
         Game();
         ~Game();
         Camera camera;
+        
         int     init();
         void    run();
         void    handleInput(GLFWwindow* window);
