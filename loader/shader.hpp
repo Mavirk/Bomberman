@@ -2,7 +2,7 @@
 #define SHADER_H
 
 #include <GL/glew.h> // include glad to get all the required OpenGL headers
-#include <GLFW?glfw3.h>
+#include <GLFW/glfw3.h>
 
 #include <string>
 #include <fstream>
