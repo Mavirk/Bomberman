@@ -122,7 +122,6 @@ void Camera::updateCameraVectors()
 
 Camera::Camera(Camera const & src)
 {
-	std::cout << "Copy constructor called" << std::endl;
 	*this = src;
 
 	return ;
@@ -130,7 +129,6 @@ Camera::Camera(Camera const & src)
 
 Camera::~Camera(void)
 {
-	std::cout << "Destructor called" << std::endl;
 	return ;
 }
 
