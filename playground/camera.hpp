@@ -1,11 +1,11 @@
 #ifndef CAMERA_HPP
 # define CAMERA_HPP
+
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
 #include <vector>
-
 #include <iostream>
 
 // Defines several possible options for camera movement. Used as abstraction to stay away from window-system specific input methods
@@ -27,14 +27,32 @@ class Camera
 {
 	public:
 		//start canonical form
-		Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = YAW, float pitch = PITCH);
+        Camera();
+		Camera(glm::vec3 position, glm::vec3 up, float yaw , float pitch);
 		Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch);
 		Camera(Camera const & src);
 		~Camera(void);
+
+		Camera	&operator=(Camera const &rhs);
+
+        void    ProcessMouseScroll(float yoffset);
+        void    ProcessKeyboard(Camera_Movement direction, float deltaTime);
+        void    ProcessMouseMovement(float xoffset, float yoffset, GLboolean constrainPitch);
+        void    DoMovement(int direction, float deltaTime);
         glm::mat4 GetViewMatrix();
-        void ProcessKeyboard(Camera_Movement direction, float deltaTime);
-        void ProcessMouseMovement(float xoffset, float yoffset, GLboolean constrainPitch = true);
-        void ProcessMouseScroll(float yoffset);
+        glm::vec3 GetPosition() const;
+        glm::vec3 GetFront() const;
+        glm::vec3 GetUp() const;
+        glm::vec3 GetRight() const ;
+        glm::vec3 GetWorldUp() const;
+        GLfloat GetYaw() const;
+        GLfloat GetPitch() const;
+        GLfloat GetMovementSpeed() const;
+        GLfloat GetMouseSensitivity() const;
+        GLfloat GetZoom() const;
+    
+	private:
+        void updateCameraVectors();
         // Camera Attributes
         glm::vec3 Position;
         glm::vec3 Front;
@@ -42,20 +60,13 @@ class Camera
         glm::vec3 Right;
         glm::vec3 WorldUp;
         // Euler Angles
-        float Yaw;
-        float Pitch;
+        GLfloat Yaw;
+        GLfloat Pitch;
         // Camera options
-        float MovementSpeed;
-        float MouseSensitivity;
-        float Zoom;
+        GLfloat MovementSpeed;
+        GLfloat MouseSensitivity;
+        GLfloat Zoom;
 
-		Camera	&operator=(Camera const &rhs);
-		//end canonical form
-
-		int	getfoo(void) const;
-	private:
-        void updateCameraVectors();
-		int _foo;
 };
 
 std::ostream	&operator<<(std::ostream &out, Camera const &value);
