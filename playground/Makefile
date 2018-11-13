@@ -1,24 +1,9 @@
-
-NAME=				bomberman
-RM=					rm -f
-INC=				-I ~/.brew/include 
-LIB=				-L ~/.brew/lib -lGLEW.2.1 -lglfw.3.2  -I ~/.brew/include -framework OpenGL
-CPPFLAGS=			-Wall -Wextra -Werror
-SRC=				main.cpp \
-					game.cpp \
-					model.cpp \
-					shader.cppv \
-					camera.cpp \
-					mesh.cpp 
-
-
 COM_COLOR   = \033[0;34m
 OBJ_COLOR   = \033[0;36m
 OK_COLOR    = \033[0;32m
 ERROR_COLOR = \033[0;31m
 WARN_COLOR  = \033[0;33m
 NO_COLOR    = \033[m
-
 
 OK_STRING    = "[OK]"
 ERROR_STRING = "[ERROR]"
@@ -29,14 +14,18 @@ NAME=	bomberman
 
 RM=		rm -f
 
-FLAGS=	clang++ -std=c++11 -Wall -Wextra -Werror
+FLAGS=	g++ -std=c++11 -Wall -Wextra 
 
 INC=	-I $(HOME)/.brew/include 
-LIB=	-L $(HOME)/.brew/lib -lGLEW.2.1 -lglfw.3.2  -I $(HOME)/.brew/include -framework OpenGL
+LIB=	-L $(HOME)/.brew/lib -lGLEW.2.1 -lglfw.3.2 -lassimp.4.1.0 -I $(HOME)/.brew/include -framework OpenGL
 
-SRC=	main.cpp \
-		game.cpp \
-		camera.cpp
+SRC=				main.cpp \
+					game.cpp \
+					model.cpp \
+					shader.cpp \
+					camera.cpp \
+					stb_image.cpp \
+					mesh.cpp 
 
 OBJ=	$(SRC:.cpp=.o)
 

@@ -1,42 +1,59 @@
 #include "game.hpp"
+// timing
+float deltaTime = 0.0f;
+float lastFrame = 0.0f;
+
+// settings
+const unsigned int SCR_WIDTH = 800;
+const unsigned int SCR_HEIGHT = 600;
+
+Game::Game(){
+    return;
+}
 
 Game::~Game(){
     return;
 }
 
-Game::Game(){
-    return;
-}
+
 // Moves/alters the camera positions based on user input
 
 void
 Game::run(){
     while(!glfwWindowShouldClose(window)){
-        GLfloat deltaTime = 0.0f;
-        GLfloat lastFrame = 0.0f;
-        //get frames
-        GLfloat currentFrame = glfwGetTime();
+        // per-frame time logic
+        // --------------------
+        float currentFrame = glfwGetTime();
         deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
-        // Clear Screen
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
-        // INPUT
-        handleInput(window);
+
+        // render
+        // ------
+        glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        // don't forget to enable shader before setting uniforms
+        ourShader.use();
+
+        // view/projection transformations
+        glm::mat4 projection = glm::perspective(glm::radians(camera.GetZoom()), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+        glm::mat4 view = camera.GetViewMatrix();
+        ourShader.setMat4("projection", projection);
+        ourShader.setMat4("view", view);
+
+        // render the loaded model
+        glm::mat4 model;
+        model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f)); // translate it down so it's at the center of the scene
+        model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// it's a bit too big for our scene, so scale it down
+        ourShader.setMat4("model", model);
+        ourModel.Draw(ourShader);
         
-        // rendering commands here
-        // ...
-        // check events and swap buffers
+        // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
+        // -------------------------------------------------------------------------------
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
     return;
-}
-
-void
-Game::handleInput(GLFWwindow* window){
-    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, true);
 }
 
 int
@@ -47,9 +64,11 @@ Game::init(){
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+
     // Create the window instance
     window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
-    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+
+
     // Check if window is created
     if (window == NULL){
         std::cout << "Failed to create GLFW window" << std::endl;
@@ -58,21 +77,24 @@ Game::init(){
     }
     glfwMakeContextCurrent(window);
 
-    //set mouse cursor to be fix to the window
-    // glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-
-    glViewport(0, 0, 800, 600);
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     //set callbacks
+    glfwSetFramebufferSizeCallback(window, FramebufferSizeCallback);
     glfwSetKeyCallback(window, KeyCallback);
     glfwSetCursorPosCallback(window, MouseCallback);
     glfwSetScrollCallback(window, ScrollCallback);
+
+    //set mouse cursor to be fix to the window
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+    glEnable(GL_DEPTH_TEST);
+
+    Shader  ourShader("modelLoading.vs", "modelLoading.fs");
+    Model   ourModel("resources/objects/nanosuit/nanosuit.obj");
     return 1;
 }
 
 void
-framebuffer_size_callback(GLFWwindow* window, int width, int height){
+FramebufferSizeCallback(GLFWwindow* window, int width, int height){
     if (window)
         glViewport(0, 0, width, height);
 }

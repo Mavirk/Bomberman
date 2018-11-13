@@ -1,10 +1,14 @@
 #ifndef MESH_HPP
 #define MESH_HPP
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+
 #include <iostream>
 #include <vector>
 #include <string>
 #include "shader.hpp"
+#include "camera.hpp"
 
 struct Vertex {
     glm::vec3 Position;

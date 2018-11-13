@@ -9,22 +9,24 @@
 #include "shader.hpp"
 #include "mesh.hpp"
 
-void    framebuffer_size_callback(GLFWwindow* window, int width, int height);
+void    FramebufferSizeCallback(GLFWwindow* window, int width, int height);
 void    KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode);
 void    ScrollCallback(GLFWwindow *window, double xOffset, double yOffset);
 void    MouseCallback(GLFWwindow *window, double xPos, double yPos);
 
 class Game {
     public:
-        GLFWwindow* window;
-        bool    running;
         Game();
         ~Game();
-        Camera camera;
+        GLFWwindow* window;
+        bool        running;
+        Model       ourModel;
+        Shader      ourShader;  
+        Camera      camera;
+
         
         int     init();
         void    run();
-        void    handleInput(GLFWwindow* window);
 };
 
 #endif

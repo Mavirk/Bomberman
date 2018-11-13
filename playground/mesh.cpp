@@ -1,6 +1,6 @@
 #include "mesh.hpp"
 
-Mesh::Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures){
+Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures){
     this->vertices = vertices;
     this->indices = indices;
     this->textures = textures;
@@ -14,15 +14,15 @@ Mesh::~Mesh(){
 
 void
 Mesh::Draw(Shader shader){
+    Camera camera;
     unsigned int diffuseNr = 1;
     unsigned int specularNr = 1;
-    glm::mat4 view;
     for(unsigned int i = 0; i < textures.size(); i++)
     {
         glActiveTexture(GL_TEXTURE0 + i); // activate proper texture unit before binding
         // retrieve texture number (the N in diffuse_textureN)
-        string number;
-        string name = textures[i].type;
+        std::string number;
+        std::string name = textures[i].type;
         if(name == "texture_diffuse")
             number = std::to_string(diffuseNr++);
         else if(name == "texture_specular")
@@ -35,17 +35,8 @@ Mesh::Draw(Shader shader){
 
     // draw mesh
     glBindVertexArray(VAO);
-    view = camera.GetViewMatrix();
-    for (GLint in = 0; i < 10; i++)
-    {
-        glm::mat4 model;
-        model glm::translate(mode, vertices);
-        GLfloat = angle = 20.0f * i;
-        model = glm::rotate(model, angle, glm::vec3(1.0f, 0.3f, 0.5f));
-        glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);   
-    }
+    glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
-    return;
 }
 
 void
