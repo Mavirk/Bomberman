@@ -31,7 +31,8 @@ INC=	-I $(HOME)/.brew/include
 LIB=	-L $(HOME)/.brew/lib -lGLEW.2.1 -lglfw.3.2  -I $(HOME)/.brew/include -framework OpenGL
 
 SRC=	main.cpp \
-		game.cpp
+		game.cpp \
+		camera.cpp
 
 OBJ=	$(SRC:.cpp=.o)
 
@@ -57,6 +58,7 @@ dependencies:
 	@if ! test -d ~/.brew/Cellar/assimp; \
 	then brew install assimp; \
 	fi; \
+	
 
 	@printf "%b" "$(OK_COLOR)Dependencies installed\n"; \
 
