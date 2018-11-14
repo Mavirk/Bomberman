@@ -89,7 +89,9 @@ Game::init(){
     glEnable(GL_DEPTH_TEST);
 
     Shader  ourShader("modelLoading.vs", "modelLoading.fs");
-    Model   ourModel("resources/objects/nanosuit/nanosuit.obj");
+    Model   ourModel("./resources/wall.obj");
+    Model   model;
+    model.TextureFromFile("white.png", "./resources/");
     return 1;
 }
 

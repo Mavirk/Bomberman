@@ -14,7 +14,7 @@ NAME=	bomberman
 
 RM=		rm -f
 
-FLAGS=	g++ -std=c++11 -Wall -Wextra 
+FLAGS=	g++ -std=c++11 -Wall -Werror -Wextra 
 
 INC=	-I $(HOME)/.brew/include 
 LIB=	-L $(HOME)/.brew/lib -lGLEW.2.1 -lglfw.3.2 -lassimp.4.1.0 -I $(HOME)/.brew/include -framework OpenGL
