@@ -59,7 +59,15 @@ Game::run(){
 int
 Game::init(){
     // Init glfw with version number 
+    // glewInit();
     glfwInit();
+    // glewInit();
+    // GLenum err = glewInit();
+    // if (err != GLEW_OK)
+    //     exit(1); // or handle the error in a nicer way
+    // if (!GLEW_VERSION_2_1)  // check that the machine supports the 2.1 API.
+    //     exit(1);
+    glewExperimental = GL_TRUE;
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -89,9 +97,10 @@ Game::init(){
     glEnable(GL_DEPTH_TEST);
 
     Shader  ourShader("modelLoading.vs", "modelLoading.fs");
-    Model   ourModel("./resources/wall.obj");
-    Model   model;
-    model.TextureFromFile("white.png", "./resources/");
+    std::cout << "Works2!!!" << std::endl;
+    Model   ourModel("resources/wall.obj");
+    Model   *model = new Model();
+    model->TextureFromFile("resources/white.png", "resources/white.png");
     return 1;
 }
 

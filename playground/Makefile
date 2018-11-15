@@ -14,25 +14,26 @@ NAME=	bomberman
 
 RM=		rm -f
 
-FLAGS=	g++ -std=c++11 -Wall -Werror -Wextra 
+CPPVERSION=	c++11
+
+FLAGS=	clang++ -std=c++11 -Wall -Wextra 
 
 INC=	-I $(HOME)/.brew/include 
-LIB=	-L $(HOME)/.brew/lib -lGLEW.2.1 -lglfw.3.2 -lassimp.4.1.0 -I $(HOME)/.brew/include -framework OpenGL
+LIB=	-L $(HOME)/.brew/lib -lGLEW -lglfw -lassimp -I $(HOME)/.brew/include -framework OpenGL -L . -lSOIL2 -framework CoreFoundation
+
 
 SRC=				main.cpp \
 					game.cpp \
 					model.cpp \
 					shader.cpp \
 					camera.cpp \
-					stb_image.cpp \
 					mesh.cpp 
 
 OBJ=	$(SRC:.cpp=.o)
 
 all: dependencies
 	@printf "%b" "$(COM_COLOR)$(COM_STRING) $(OBJ_COLOR)$(@)$(NO_COLOR)\n";
-	@$(FLAGS) $(SRC) $(LIB) $(INC) -o $(NAME)
-
+	@$(FLAGS) $(SRC) $(LIB) $(INC) -o $(NAME) 
 dependencies:
 	@printf "%b" "$(COM_COLOR)$(COM_STRING) $(OBJ_COLOR)$(@)$(NO_COLOR)\n";
 	@if ! test -d ~/.brew/Library; \

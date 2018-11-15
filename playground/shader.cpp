@@ -21,6 +21,7 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath){
     {
         // open files
         vShaderFile.open(vertexPath);
+        
         fShaderFile.open(fragmentPath);
         std::stringstream vShaderStream, fShaderStream;
         // read file's buffer contents into streams
@@ -45,7 +46,9 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath){
     char infoLog[512];
     
     // Vertex Shader
+    std::cout << "Works2!!!" << std::endl;
     vertexShader = glCreateShader(GL_VERTEX_SHADER);
+    std::cout << "Works3!!!" << std::endl;
     glShaderSource(vertexShader, 1, &vShaderCode, NULL);
     glCompileShader(vertexShader);
     glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);

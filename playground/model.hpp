@@ -3,7 +3,7 @@
 
 #include "mesh.hpp"
 #include "shader.hpp"
-#include "stb_image.h"
+#include "SOIL2/SOIL2.h"
 
 #include <string>
 #include <vector>
