@@ -46,7 +46,7 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath){
     char infoLog[512];
     
     // Vertex Shader
-    std::cout << "Works2!!!" << std::endl;
+    std::cout << "Works2!llll!!" << std::endl;
     vertexShader = glCreateShader(GL_VERTEX_SHADER);
     std::cout << "Works3!!!" << std::endl;
     glShaderSource(vertexShader, 1, &vShaderCode, NULL);

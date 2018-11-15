@@ -3,12 +3,11 @@
 int main(){
     int running = 0;
     Game game;
-    std::cout << "Works!!!" << std::endl;
+    std::cout << "Main 1" << std::endl;
     running = game.init();
-    std::cout << "Works2!!!" << std::endl;
-    if (running == 1)
-    {
-        std::cout << "Works3!!!" << std::endl;
+    std::cout << "Main 2" << std::endl;
+    if (running == 1){
+        std::cout << "Main 3" << std::endl;
         game.run();
     }
     glfwTerminate();

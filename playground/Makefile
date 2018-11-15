@@ -19,7 +19,7 @@ CPPVERSION=	c++11
 FLAGS=	clang++ -std=c++11 -Wall -Wextra 
 
 INC=	-I $(HOME)/.brew/include 
-LIB=	-L $(HOME)/.brew/lib -lGLEW -lglfw -lassimp -I $(HOME)/.brew/include -framework OpenGL -L . -lSOIL2 -framework CoreFoundation
+LIB=	-L $(HOME)/.brew/lib  -lGLEW -lglfw -lassimp -framework OpenGL -L . -lSOIL2 -framework CoreFoundation
 
 
 SRC=				main.cpp \

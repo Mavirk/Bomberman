@@ -58,24 +58,31 @@ Game::run(){
 
 int
 Game::init(){
+    std::cout << "Game::init 1" << std::endl;
     // Init glfw with version number 
-    // glewInit();
+    // Init glfw with version number 
+    std::cout << "Game::init t" << std::endl;
+    GLenum err = glewInit();
+    std::cout << "Game::init 2" << std::endl;
     glfwInit();
-    // glewInit();
-    // GLenum err = glewInit();
-    // if (err != GLEW_OK)
-    //     exit(1); // or handle the error in a nicer way
-    // if (!GLEW_VERSION_2_1)  // check that the machine supports the 2.1 API.
-    //     exit(1);
+    if (err != GLEW_OK){
+        std::cout << "glew init failed" << std::endl;
+        exit(1); // or handle the error in a nicer way
+    }
+    if (!GLEW_VERSION_2_1) {  // check that the machine supports the 2.1 API.
+        std::cout << "glew version is not 2.1" << std::endl;
+        exit(1);
+    }
     glewExperimental = GL_TRUE;
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
     // Create the window instance
     window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
 
+    std::cout << "Game::init 3" << std::endl;
 
     // Check if window is created
     if (window == NULL){
@@ -85,19 +92,21 @@ Game::init(){
     }
     glfwMakeContextCurrent(window);
 
+    std::cout << "Game::init 4" << std::endl;
     //set callbacks
     glfwSetFramebufferSizeCallback(window, FramebufferSizeCallback);
     glfwSetKeyCallback(window, KeyCallback);
     glfwSetCursorPosCallback(window, MouseCallback);
     glfwSetScrollCallback(window, ScrollCallback);
 
+    std::cout << "Game::init 5" << std::endl;
     //set mouse cursor to be fix to the window
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
     glEnable(GL_DEPTH_TEST);
 
+    std::cout << "Game::init 6" << std::endl;
     Shader  ourShader("modelLoading.vs", "modelLoading.fs");
-    std::cout << "Works2!!!" << std::endl;
     Model   ourModel("resources/wall.obj");
     Model   *model = new Model();
     model->TextureFromFile("resources/white.png", "resources/white.png");
